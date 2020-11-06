@@ -33,26 +33,23 @@ function setup() {
   bubbleNum = random(1, 5)
 
 
-  for (let i = 0; i < bubbleNum; i++) {
-    rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
-    leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2))
-
-    if (mousePressed) {
-      FartBubble[i] = new fartBubble(rightBubble);
-    } else {
-      FartBubble[i] = new fartBubble(leftBubble);
-    }
-
-  }
+  // for (let i = 0; i < bubbleNum; i++) {
+  //   rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
+  //   leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2))
+  //     if(mouseIsPressed){
+  //       FartBubble[i] = new fartBubble(rightBubble);
+  //     }
+  //     else{
+  //       FartBubble[i] = new fartBubble(leftBubble);
+  //     }
+  //
+  // }
 
 }
 
 function draw() {
   background(255, 100, 90);
   strokeWeight(10);
-
-  buoyancy = createVector(0, -0.05);
-  current = createVector(random(-0.1, 0.1), 0)
 
 
   Fart.show()
@@ -65,6 +62,9 @@ function draw() {
   Screen.outline()
 
   for (let i = 0; i < FartBubble.length; i++) {
+    buoyancy = createVector(0, -0.05);
+    current = createVector(random(-0.1, 0.1), 0)
+
     FartBubble[i].show()
     FartBubble[i].move(buoyancy)
     FartBubble[i].move(current)
@@ -77,8 +77,13 @@ function draw() {
 
 function mousePressed() {
 
+  bubbleNum = random(1, 5)
 
-
+  for(let i=0;i<bubbleNum;i++){
+     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
+    let p= new fartBubble(rightBubble);
+    FartBubble.push(p)
+}
 }
 
 class fartBubble {
