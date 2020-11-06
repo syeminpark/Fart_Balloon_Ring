@@ -76,9 +76,9 @@ function draw() {
 }
 
 function mousePressed() {
-  
-  
-  
+
+
+
 }
 
 class fartBubble {
@@ -121,7 +121,7 @@ class fartBubble {
         //ellipse(this.x1+width / 2,this.y1+height / 2.5,10,10)
 
         if (this.x1 + width / 2>= this.pos.x && this.pos.y <= this.y1 + height / 2.5+13) {
-          this.max = cos(radians(275)) * this.radius1+width/2            
+          this.max = cos(radians(275)) * this.radius1+width/2
           this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
            this.vel.x=0
          this.pos.x++
@@ -182,14 +182,14 @@ class fart {
 
   }
   show() {
-    
-    
-    
+
+
+
     stroke(130)
     fill(220);
-    
-    
-    
+
+
+
     strokeWeight(5)
 
     beginShape()
@@ -217,8 +217,8 @@ class fart {
 
     vertex(width * 0.6, height * 0.79)
     endShape()
-    
-    
+
+
   }
   mask(){
     stroke(220)
@@ -226,35 +226,35 @@ class fart {
     noFill()
 
    //left mask
-    
+
       ellipse(width/5,height*0.87,100,80)
 
     ellipse(width/4.5,height*0.78,45,60)
-    
+
     ellipse(width/6.4,height*0.818,55,64)
     ellipse(width/8,height*0.91,60,48)
     ellipse(width/5.05,height*0.93,48,60)
     ellipse(width/3.8,height*0.89,50,60)
-  
-    
+
+
 
     ellipse(width/3.8,height*0.82,40,45)
 
    ellipse(width/3.4,height*0.79,40,45)
     ellipse(width/3,height*0.79,40,30)
-    
-    
+
+
    //left mask
     ellipse(width/5*4,height*0.87,100,80)
-    
+
     ellipse(width/4.5*3.5,height*0.78,45,60)
-    
+
     ellipse(width/6.4*5.4,height*0.818,55,64)
     ellipse(width/8*7,height*0.91,60,48)
     ellipse(width/5.05*4.05,height*0.93,48,60)
     ellipse(width/3.8*2.8,height*0.89,50,60)
-    
-    
+
+
 
     ellipse(width/3.8*2.8,height*0.82,40,45)
 
@@ -323,7 +323,7 @@ class ass {
     line(width * 0.52, height * 0.2, width * 0.5, height * 0.16)
     line(width * 0.52, height * 0.2, width * 0.54, height * 0.16)
 
-    //pimple 
+    //pimple
     fill(255, 0, 0)
     ellipse(width / 3, height * 0.6, 10, 10)
   }
