@@ -111,6 +111,7 @@ class fartBubble {
     this.x1 = 0
     this.y1 = 0
     this.max=0
+    this.min=0
 
   }
 
@@ -133,34 +134,38 @@ class fartBubble {
     this.radius1 = x
     this.radius2 = y
 
-    if (mousePressed) {
-      for (this.radians = 180; this.radians < 275; this.radians++) {
 
-        this.x1 = cos(radians(this.radians)) * this.radius1
-        this.y1 = sin(radians(this.radians)) * this.radius2
-        //ellipse(this.x1+width / 2,this.y1+height / 2.5,10,10)
-
-        if (this.x1 + width / 2>= this.pos.x && this.pos.y <= this.y1 + height / 2.5+13) {
-          this.max = cos(radians(275)) * this.radius1+width/2
-          this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
-           this.vel.x=0
-         this.pos.x++
-        }
-      }
-    } else {
       for (this.radians = 180; this.radians < 270; this.radians++) {
 
         this.x1 = cos(radians(this.radians)) * this.radius1
         this.y1 = sin(radians(this.radians)) * this.radius2
         //ellipse(this.x1+width / 2,this.y1+height / 2.5,10,10)
 
-        if (this.x1 + width / 2 >= this.pos.x && this.pos.y <= this.y1 + height / 2.5) {
-          this.vel.y *= 0.75
+        if (this.pos.x < this.x1 + width / 2 &&  this.pos.y < this.y1 + height / 2.5+13 &&this.pos.y>height/5) {
+          this.max = cos(radians(270)) * this.radius1+width/2
+          this.vel.y=0
+          this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
+           this.vel.x=0
+         this.pos.x++
+        }
+
+      }
+
+      for (this.radians = 275; this.radians < 360; this.radians++) {
+
+        this.x1 = cos(radians(this.radians)) * this.radius1
+        this.y1 = sin(radians(this.radians)) * this.radius2
+        //ellipse(this.x1+width / 2,this.y1+height / 2.5,10,10)
+
+        if (this.x1 + width / 2 < this.pos.x && this.pos.y < this.y1 + height / 2.5+13&&this.pos.y>height/5) {
+          this.min = cos(radians(275)) * this.radius1+width/2
+          this.vel.y=0
+          this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
           this.vel.x=0
-          this.pos.x++
+          this.pos.x--
         }
       }
-    }
+
 
   }
 }
