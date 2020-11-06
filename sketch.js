@@ -6,6 +6,7 @@ let Ring;
 let Screen;
 let Fingers;
 let bubbleNum
+let d
 
 let buoyancy;
 let current;
@@ -52,6 +53,7 @@ function draw() {
   strokeWeight(10);
 
 
+
   Fart.show()
   Fart.mask()
   Ass.show()
@@ -73,7 +75,9 @@ function draw() {
 
   Screen.outline()
 
+
 }
+
 
 function mousePressed() {
   bubbleNum = random(1, 5)
@@ -116,7 +120,10 @@ class fartBubble {
   }
 
   show() {
-    fill(250)
+
+
+    fill(255)
+
     stroke(210)
     strokeWeight(5)
 
@@ -147,6 +154,7 @@ class fartBubble {
           this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
            this.vel.x=0
          this.pos.x++
+
         }
 
       }
@@ -163,6 +171,7 @@ class fartBubble {
           this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
           this.vel.x=0
           this.pos.x--
+
         }
       }
 
@@ -196,6 +205,7 @@ class ring {
   }
   show() {
 
+
     fill(255, 255, 120)
     rect(400, 200, 50, 15, 100)
 
@@ -207,11 +217,16 @@ class fart {
 
   }
   show() {
+    if(mouseClicked){
+      if(d==0){
+      d=255
+stroke(d,d,d)
+    }
+
+  }
+      fill(220);
 
 
-
-    stroke(130)
-    fill(220);
 
 
 
@@ -362,14 +377,21 @@ class screen {
 
   }
   show() {
+
     fill(250, 150, 150)
     noStroke()
     ellipse(width / 2, height / 2.5, this.radius1 * 2, this.radius2 * 2)
   }
   outline() {
     noFill()
+
     strokeWeight(10)
     stroke(255, 100, 70)
     ellipse(width / 2, height / 2.5, this.radius1 * 2, this.radius2 * 2)
   }
+}
+
+function mouseClicked(){
+  d=0;
+
 }
