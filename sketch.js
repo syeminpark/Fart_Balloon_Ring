@@ -7,6 +7,7 @@ let Screen;
 let Fingers;
 let bubbleNum
 let d
+let value;
 
 let buoyancy;
 let current;
@@ -33,26 +34,11 @@ function setup() {
 
   bubbleNum = random(1, 5)
 
-
-  // for (let i = 0; i < bubbleNum; i++) {
-  //   rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
-  //   leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2))
-  //     if(mouseIsPressed){
-  //       FartBubble[i] = new fartBubble(rightBubble);
-  //     }
-  //     else{
-  //       FartBubble[i] = new fartBubble(leftBubble);
-  //     }
-  //
-  // }
-
 }
 
 function draw() {
   background(255, 100, 90);
   strokeWeight(10);
-
-
 
   Fart.show()
   Fart.mask()
@@ -74,13 +60,11 @@ function draw() {
   }
 
   Screen.outline()
-
-
 }
-
 
 function mousePressed() {
   bubbleNum = random(1, 5)
+
 
   //left mask
  if(dist(mouseX,mouseY,width/5,height*0.87)<50 ||dist(mouseX,mouseY,width/4.5,height*0.78)<30 || dist(mouseX,mouseY,width/6.4,height*0.818)<32
@@ -90,6 +74,7 @@ function mousePressed() {
      rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
     let p= new fartBubble(rightBubble);
     FartBubble.push(p)
+    value=255
   }
 }
 else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/4.5*3.5,height*0.78)<30 || dist(mouseX,mouseY,width/6.4*5.4,height*0.818)<32
@@ -99,10 +84,9 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
        leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2))
      let p= new fartBubble(leftBubble);
      FartBubble.push(p)
+    value=1;
    }
  }
-
-
 }
 
 class fartBubble {
@@ -116,11 +100,9 @@ class fartBubble {
     this.y1 = 0
     this.max=0
     this.min=0
-
   }
 
   show() {
-
 
     fill(255)
 
@@ -141,12 +123,10 @@ class fartBubble {
     this.radius1 = x
     this.radius2 = y
 
-
       for (this.radians = 180; this.radians < 270; this.radians++) {
 
         this.x1 = cos(radians(this.radians)) * this.radius1
         this.y1 = sin(radians(this.radians)) * this.radius2
-        //ellipse(this.x1+width / 2,this.y1+height / 2.5,10,10)
 
         if (this.pos.x < this.x1 + width / 2 &&  this.pos.y < this.y1 + height / 2.5+13 &&this.pos.y>height/5) {
           this.max = cos(radians(270)) * this.radius1+width/2
@@ -156,7 +136,6 @@ class fartBubble {
          this.pos.x++
 
         }
-
       }
 
       for (this.radians = 275; this.radians < 360; this.radians++) {
@@ -174,12 +153,8 @@ class fartBubble {
 
         }
       }
-
-
   }
 }
-
-
 
 class title {
   constructor() {
@@ -214,21 +189,23 @@ class ring {
 
 class fart {
   constructor() {
+this.check1=255
+this.check2=1
 
   }
-  show() {
-    if(mouseClicked){
-      if(d==0){
-      d=255
-stroke(d,d,d)
-    }
+  show(){
+this.value=value
+
+if (this.check1==this.value){
+    stroke(255)
+    value=0
 
   }
-      fill(220);
+  else{
+    noStroke()
+  }
 
-
-
-
+    fill(220);
 
     strokeWeight(5)
 
@@ -244,6 +221,15 @@ stroke(d,d,d)
 
     vertex(width * 0.4, height * 0.79)
     endShape()
+
+    if (this.check2==this.value){
+        stroke(255)
+        value=0
+      }
+      else{
+  noStroke()
+      }
+
 
     beginShape()
     vertex(width / 3 * 2, height * 0.7)
@@ -389,9 +375,4 @@ class screen {
     stroke(255, 100, 70)
     ellipse(width / 2, height / 2.5, this.radius1 * 2, this.radius2 * 2)
   }
-}
-
-function mouseClicked(){
-  d=0;
-
 }
