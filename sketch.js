@@ -71,7 +71,7 @@ function mousePressed() {
     || dist(mouseX,mouseY,width/8,height*0.91)<30|| dist(mouseX,mouseY,width/5.05,height*0.93)<30|| dist(mouseX,mouseY,width/3.8,height*0.89)<30
     || dist(mouseX,mouseY,width/3.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3,height*0.79)<20){
   for(let i=0;i<bubbleNum;i++){
-     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2))
+     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2),random(20,30))
     let p= new fartBubble(rightBubble);
     FartBubble.push(p)
     value=255
@@ -81,7 +81,7 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
    || dist(mouseX,mouseY,width/8*7,height*0.91)<30|| dist(mouseX,mouseY,width/5.05*4.05,height*0.93)<30|| dist(mouseX,mouseY,width/3.8*2.8,height*0.89)<30
    || dist(mouseX,mouseY,width/3.8*2.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4*2.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3*2,height*0.79)<20){
      for(let i=0;i<bubbleNum;i++){
-       leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2))
+       leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2),random(20,30))
      let p= new fartBubble(leftBubble);
      FartBubble.push(p)
     value=1;
@@ -92,7 +92,6 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
 class fartBubble {
   constructor(x) {
     this.pos = x
-    this.size = random(20, 30)
     this.vel = createVector(0, 0)
     this.acc = createVector(0, 0)
     this.radians = 0
@@ -109,7 +108,7 @@ class fartBubble {
     stroke(210)
     strokeWeight(5)
 
-    ellipse(this.pos.x, this.pos.y, this.size)
+    ellipse(this.pos.x, this.pos.y, this.pos.z)
   }
 
   move(force) {
@@ -118,6 +117,13 @@ class fartBubble {
     this.vel.add(this.acc)
     this.acc.set(0, 0)
     this.acc.add(force)
+  }
+
+  intersects(other){
+
+
+  return (d<this.r+other.r);
+
   }
   edge(x, y) {
     this.radius1 = x
@@ -166,11 +172,11 @@ class title {
 
     textSize(100)
     text('뿡', width * 0.01, height * 0.2)
-    text('뿡', width * 0.88, height * 0.2)
-    text('엿', width * 0.88, height * 0.45)
+    text('뿡', width * 0.86, height * 0.2)
+    text('엿', width * 0.86, height * 0.45)
     text('엿', width * 0.01, height * 0.45)
     text('링', width * 0.01, height * 0.7)
-    text('링', width * 0.88, height * 0.7)
+    text('링', width * 0.86, height * 0.7)
   }
 }
 
