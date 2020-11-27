@@ -61,21 +61,68 @@ function draw() {
     for (let j=0;j<FartBubble.length;j++){
       if(FartBubble[i]!==FartBubble[j] && FartBubble[i].intersects(FartBubble[j])){
         overlapping=true
+        // resolveCollision(FartBubble[i],FartBubble[j])
       }
     }
   if(overlapping){
+    FartBubble[i].show(0)
 
   }
   else{
-
+FartBubble[i].show(255)
   }
 
 }
   Screen.outline()
 }
 
+
+// function rotate1(velocity,angle){
+//     let rotatedVelocities= {
+//       x: velocty.x*Math.cos(angle)-velocity * Math.sin(angle),
+//        y:velocity.x*Math.sin(angle)+ velocity * Math.cos(angle)
+//     }
+// }
+//
+// function resolveCollision(particle, otherParticle) {
+//     const xVelocityDiff = particle.vel.x - otherParticle.vel.x;
+//     const yVelocityDiff = particle.vel.y - otherParticle.vel.y;
+//
+//     const xDist = otherParticle.pos.x - particle.pos.x;
+//     const yDist = otherParticle.pos.y - particle.pos.y;
+//
+//     // Prevent accidental overlap of particles
+//     if (xVelocityDiff * xDist + yVelocityDiff * yDist >= 0) {
+//
+//         // Grab angle between the two colliding particles
+//         const angle = -Math.atan2(otherParticle.pos.y - particle.pos.y, otherParticle.pos.x - particle.pos.x);
+//
+//         // Store mass in var for better readability in collision equation
+//         const m1 = particle.mass;
+//         const m2 = otherParticle.mass;
+//
+//         // Velocity before equation
+//         const u1 = rotate(particle.vel, angle);
+//         const u2 = rotate(otherParticle.vel, angle);
+//
+//         // Velocity after 1d collision equation
+//         const v1 = { x: u1.x * (m1 - m2) / (m1 + m2) + u2.x * 2 * m2 / (m1 + m2), y: u1.y };
+//         const v2 = { x: u2.x * (m1 - m2) / (m1 + m2) + u1.x * 2 * m2 / (m1 + m2), y: u2.y };
+//
+//         // Final velocity after rotating axis back to original location
+//         const vFinal1 = rotate(v1, -angle);
+//         const vFinal2 = rotate(v2, -angle);
+//
+//         // Swap particle velocities for realistic bounce effect
+//         particle.vel.x = vFinal1.x;
+//         particle.vel.y = vFinal1.y;
+//
+//         otherParticle.vel.x = vFinal2.x;
+//         otherParticle.vel.y = vFinal2.y;
+//     }
+// }
 function mousePressed() {
-  bubbleNum = random(1, 5)
+  bubbleNum = random(0,4)
 
 
   //left mask
@@ -84,8 +131,17 @@ function mousePressed() {
     || dist(mouseX,mouseY,width/3.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3,height*0.79)<20){
   for(let i=0;i<bubbleNum;i++){
      rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2),random(20,30))
+     // if(i !== 0){
+     //   for(let j=0;j<FartBubble.length;j++){
+     //      if(dist(rightBubble.x,rightBubble.y,FartBubble[j].pos.x,FartBubble[j].pos.y)<rightBubble.z+FartBubble[j].pos.z){
+     //         rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2),random(20,30))
+     //         j=-1
+     //      }
+     //   }
+     // }
     let p= new fartBubble(rightBubble);
     FartBubble.push(p)
+
     value=255
   }
 }
@@ -96,10 +152,12 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
        leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2),random(20,30))
      let p= new fartBubble(leftBubble);
      FartBubble.push(p)
+
     value=1;
    }
  }
 }
+
 
 class fartBubble {
   constructor(x) {
@@ -111,11 +169,15 @@ class fartBubble {
     this.y1 = 0
     this.max=0
     this.min=0
+    this.color=0
+    this.mass=1
+
   }
 
-  show() {
+  show(d) {
+    this.color=d
 
-    fill(255)
+    fill(this.color,this.color,this.color)
 
     stroke(210)
     strokeWeight(5)
@@ -135,7 +197,7 @@ class fartBubble {
     let d=dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
 
 
-  return (d<this.pos.z+other.pos.z);
+  return (d*2<this.pos.z+other.pos.z);
 
   }
   edge(x, y) {
