@@ -57,8 +57,20 @@ function draw() {
     FartBubble[i].move(buoyancy)
     FartBubble[i].move(current)
     FartBubble[i].edge(rad1, rad2)
+    let overlapping=false
+    for (let j=0;j<FartBubble.length;j++){
+      if(FartBubble[i]!==FartBubble[j] && FartBubble[i].intersects(FartBubble[j])){
+        overlapping=true
+      }
+    }
+  if(overlapping){
+
+  }
+  else{
+
   }
 
+}
   Screen.outline()
 }
 
@@ -120,9 +132,10 @@ class fartBubble {
   }
 
   intersects(other){
+    let d=dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
 
 
-  return (d<this.r+other.r);
+  return (d<this.pos.z+other.pos.z);
 
   }
   edge(x, y) {
