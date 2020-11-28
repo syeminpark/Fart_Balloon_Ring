@@ -197,7 +197,7 @@ class fartBubble {
     let d=dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
 
 
-  return (d*2<this.pos.z+other.pos.z);
+  return (d<(this.pos.z+other.pos.z)/2);
 
   }
   edge(x, y) {
