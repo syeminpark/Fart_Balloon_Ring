@@ -54,7 +54,7 @@ function draw() {
 
   FartBubble.forEach(fartBubble =>{
     buoyancy = createVector(0, -0.05);
-    current = createVector(random(-0.1, 0.1), 0)
+    current = createVector(random(-0.2, 0.2), 0)
 
     fartBubble.show()
     fartBubble.collide()
@@ -187,7 +187,7 @@ class fartBubble {
          this.vx *= friction;
          this.vy*=-friction;
        } else if (this.pos.x - this.pos.z/ 2 < width*0.25) {
-         
+
          this.vx *= friction;
          this.vy*=-friction;
        }
