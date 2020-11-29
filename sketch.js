@@ -34,9 +34,6 @@ function setup() {
   Title = new title();
   Ring = new ring();
   Screen = new screen(rad1, rad2);
-
-
-
 }
 
 function draw() {
@@ -61,21 +58,14 @@ function draw() {
     fartBubble.move(buoyancy)
     fartBubble.move(current)
     fartBubble.edge(rad1, rad2)
-//     let overlapping=false
-//     for (let j=0;j<FartBubble.length;j++){
-//       if(FartBubble[i]!==FartBubble[j] && FartBubble[i].intersects(FartBubble[j])){
-//         overlapping=true
-//         // resolveCollision(FartBubble[i],FartBubble[j])
-//       }
-//     }
-//   if(overlapping){
-//     FartBubble[i].show(0)
-//
-//   }
-//   else{
-// FartBubble[i].show(255)
-  // }
+
 })
+
+for (let i = FartBubble.length - 1; i >= 0; i--) {
+    if (FartBubble[i].pop()) {
+      FartBubble.splice(i, 1);
+    }
+  }
 
   Screen.outline()
 }
@@ -140,7 +130,16 @@ class fartBubble {
     strokeWeight(5)
 
     ellipse(this.pos.x, this.pos.y, this.pos.z)
+
   }
+
+  pop() {
+      if (this.pos.y<random(20,50)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
 
   collide(){
     for (let i = this.id + 1; i < FartBubble.length; i++) {
@@ -192,18 +191,10 @@ class fartBubble {
          this.vy*=-friction;
        }
 
-
-
 }
 
 
-  intersects(other){
-    let d=dist(this.pos.x, this.pos.y, other.pos.x, other.pos.y)
 
-
-  return (d<(this.pos.z+other.pos.z)/2);
-
-  }
   edge(x, y) {
     this.radius1 = x
     this.radius2 = y
