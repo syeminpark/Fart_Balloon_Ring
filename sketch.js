@@ -126,8 +126,9 @@ class fartBubble {
 
     fill(this.color,this.color,this.color)
 
-    stroke(210)
-    strokeWeight(5)
+    stroke(210,240,20)
+    strokeWeight(8)
+
 
     ellipse(this.pos.x, this.pos.y, this.pos.z)
 
