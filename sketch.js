@@ -134,7 +134,11 @@ class fartBubble {
   }
 
   pop() {
+    if(this.pos.y<70){
+      this.pos.z++
+    }
       if (this.pos.y<random(20,50)) {
+
         return true;
       } else {
         return false;
