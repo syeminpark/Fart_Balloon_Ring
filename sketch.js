@@ -8,6 +8,7 @@ let Fingers;
 let bubbleNum
 let d
 let value;
+let friction = 0;
 
 let buoyancy;
 let current;
@@ -17,7 +18,7 @@ let leftBubble
 let rad1
 let rad2
 
-let spring =0.0005
+let spring =0.005
 
 
 function setup() {
@@ -158,11 +159,11 @@ class fartBubble {
          let ax = (targetX - this.others[i].pos.x) * spring;
         let ay = (targetY - this.others[i].pos.y) * spring;
 
-        this.vx -= ax;
-        this.vy -= ay;
+        this.vx += ax;
+        this.vy += ay;
 
-        this.others[i].vx += ax;
-        this.others[i].vy += ay;
+        this.others[i].vx -= ax;
+        this.others[i].vy -= ay;
 
       }
     }
@@ -170,15 +171,30 @@ class fartBubble {
   }
 
   move(force) {
+
+
     this.pos.x+=this.vx
     this.pos.y+=this.vy
-
     this.pos.add(this.vel)
 
     this.vel.add(this.acc)
     this.acc.set(0, 0)
     this.acc.add(force)
-  }
+
+
+    if (this.pos.x + (this.pos.z / 2) > width*0.75) {
+
+         this.vx *= friction;
+         this.vy*=-friction;
+       } else if (this.pos.x - this.pos.z/ 2 < width*0.25) {
+         
+         this.vx *= friction;
+         this.vy*=-friction;
+       }
+
+
+
+}
 
 
   intersects(other){
