@@ -1,20 +1,18 @@
 let Ass;
 let Fart;
 let FartBubble = [];
-let Title;
 let Ring;
 let Screen;
 let Fingers;
 let bubbleNum
+
 let d
 let value;
-let friction = 0;
 
+let friction = 0;
 let buoyancy;
 let current;
 
-let rightBubble
-let leftBubble
 let rad1
 let rad2
 
@@ -24,6 +22,8 @@ let spring =0.005
 function setup() {
   createCanvas(800, 600);
 
+
+
   rad1 = width * 0.55 / 2
   rad2 = height / 2.5 / 2
 
@@ -31,7 +31,6 @@ function setup() {
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
-  Title = new title();
   Ring = new ring();
   Screen = new screen(rad1, rad2);
 }
@@ -43,11 +42,11 @@ function draw() {
   Fart.show()
   Fart.mask()
   Ass.show()
-  Title.show()
   Screen.show()
   Fingers.show()
   Ring.show()
   Screen.outline()
+  
 
   FartBubble.forEach(fartBubble =>{
     buoyancy = createVector(0, -0.05);
@@ -68,6 +67,7 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   }
 
   Screen.outline()
+  title()
 }
 
 function mousePressed() {
@@ -95,7 +95,7 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
      let p= new fartBubble(leftBubble,i,FartBubble);
      FartBubble.push(p)
 
-    value=1;
+    value=1
    }
  }
 }
@@ -118,20 +118,16 @@ class fartBubble {
     this.min=0
     this.color=0
     this.mass=1
-
   }
 
   show(d) {
     this.color=d
 
     fill(this.color,this.color,this.color)
-
     stroke(210,240,20)
     strokeWeight(8)
 
-
     ellipse(this.pos.x, this.pos.y, this.pos.z)
-
   }
 
   pop() {
@@ -152,7 +148,7 @@ class fartBubble {
       let dx = this.others[i].pos.x - this.pos.x;
       let dy = this.others[i].pos.y - this.pos.y;
 
-       let distance = sqrt(dx * dx + dy * dy);
+      let distance = sqrt(dx * dx + dy * dy);
       let minDist = this.others[i].pos.z / 2 + this.pos.z / 2;
       if (distance < minDist) {
 
@@ -168,14 +164,11 @@ class fartBubble {
 
         this.others[i].vx -= ax;
         this.others[i].vy -= ay;
-
       }
     }
-
   }
 
   move(force) {
-
 
     this.pos.x+=this.vx
     this.pos.y+=this.vy
@@ -185,20 +178,17 @@ class fartBubble {
     this.acc.set(0, 0)
     this.acc.add(force)
 
-
     if (this.pos.x + (this.pos.z / 2) > width*0.75) {
 
          this.vx *= friction;
          this.vy*=-friction;
-       } else if (this.pos.x - this.pos.z/ 2 < width*0.25) {
+       }
+        else if (this.pos.x - this.pos.z/ 2 < width*0.25) {
 
          this.vx *= friction;
          this.vy*=-friction;
        }
-
 }
-
-
 
   edge(x, y) {
     this.radius1 = x
@@ -215,10 +205,8 @@ class fartBubble {
           this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
            this.vel.x=0
          this.pos.x++
-
         }
       }
-
       for (this.radians = 275; this.radians < 360; this.radians++) {
 
         this.x1 = cos(radians(this.radians)) * this.radius1
@@ -231,50 +219,48 @@ class fartBubble {
           this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
           this.vel.x=0
           this.pos.x--
-
         }
       }
   }
 }
 
-class title {
-  constructor() {
+function title() {
 
-  }
-  show() {
     stroke(0)
     fill(255, 200, 100)
-
     textSize(100)
-    text('뿡', width * 0.01, height * 0.2)
-    text('뿡', width * 0.86, height * 0.2)
-    text('엿', width * 0.86, height * 0.45)
-    text('엿', width * 0.01, height * 0.45)
-    text('링', width * 0.01, height * 0.7)
-    text('링', width * 0.86, height * 0.7)
-  }
+    strokeWeight(3)
+    
+    let textList=[
+    text('뿡', width * 0.01, height * 0.2),
+    text('뿡', width * 0.86, height * 0.2),
+    text('엿', width * 0.86, height * 0.45),
+    text('엿', width * 0.01, height * 0.45),
+    text('링', width * 0.01, height * 0.7),
+    text('링', width * 0.86, height * 0.7),
+    ]
+    return(textList)
 }
 
 class ring {
   constructor() {
-
   }
   show() {
 
-
     fill(255, 255, 120)
     rect(400, 200, 50, 15, 100)
-
   }
 }
 
 class fart {
   constructor() {
+
 this.check1=255
 this.check2=1
 
   }
   show(){
+
 this.value=value
 
 if (this.check1==this.value){
@@ -282,12 +268,11 @@ if (this.check1==this.value){
     value=0
 
   }
-  else{
+else{
     noStroke()
   }
 
     fill(220);
-
     strokeWeight(5)
 
     beginShape()
@@ -303,14 +288,13 @@ if (this.check1==this.value){
     vertex(width * 0.4, height * 0.79)
     endShape()
 
-    if (this.check2==this.value){
-        stroke(255)
-        value=0
+if (this.check2==this.value){
+     stroke(255)
+     value=0
       }
-      else{
+else{
   noStroke()
       }
-
 
     beginShape()
     vertex(width / 3 * 2, height * 0.7)
@@ -324,7 +308,6 @@ if (this.check1==this.value){
 
     vertex(width * 0.6, height * 0.79)
     endShape()
-
 
   }
   mask(){
@@ -343,11 +326,9 @@ if (this.check1==this.value){
     ellipse(width/5.05,height*0.93,60)
     ellipse(width/3.8,height*0.89,60)
 
-
-
     ellipse(width/3.8,height*0.82,45)
 
-   ellipse(width/3.4,height*0.79,45)
+    ellipse(width/3.4,height*0.79,45)
     ellipse(width/3,height*0.79,40)
 
 
@@ -366,7 +347,7 @@ if (this.check1==this.value){
 
     ellipse(width/3.8*2.8,height*0.82,45)
 
-   ellipse(width/3.4*2.4,height*0.79,45)
+    ellipse(width/3.4*2.4,height*0.79,45)
     ellipse(width/3*2,height*0.79,40)
   }
 }
@@ -375,6 +356,7 @@ class fingers {
   constructor() {
 
   }
+
   show() {
     rectMode(CENTER)
     fill(255, 200, 200)
@@ -391,7 +373,6 @@ class fingers {
     //middle finger
     rect(width / 2, height / 2.1, 30, 150, 100)
     rect(width / 2, height / 2.7, 20, 40, 100)
-
   }
 }
 
@@ -403,8 +384,6 @@ class ass {
     this.R_C1 = createVector(width / 100 * 99, height / 7)
     this.R_C2 = createVector(width * 3 / 4, height * 1.1)
     this.R_A = createVector(width / 2, height / 5 * 3.5)
-
-
   }
   show() {
 
@@ -436,6 +415,7 @@ class ass {
     ellipse(width / 3, height * 0.6, 10, 10)
   }
 }
+
 class screen {
   constructor(x, y) {
 
