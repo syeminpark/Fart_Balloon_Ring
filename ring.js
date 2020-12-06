@@ -23,7 +23,7 @@ class ring {
             
             //왼쪽 부분
         
-              for (this.radians = 90; this.radians < 180; this.radians++) {
+              for (this.radians = 89; this.radians < 180; this.radians++) {
         
                 this.x1 = cos(radians(this.radians)) * this.radius1
                 this.y1 = sin(radians(this.radians)) * this.radius2
@@ -31,14 +31,14 @@ class ring {
                 if (this.pos.x < this.x1 + width / 2 &&  this.pos.y >this.y1 + height / 2.5-13) {
                   this.max = cos(radians(270)) * this.radius1+width/2
                   this.vel.y=0
-                this.vel.y=this.pos.x/this.max/this.pos.x/this.max-1
+                this.vel.y=this.pos.x/this.max/this.pos.x/this.max-1+1.4
                  this.vel.x=0
         
                  this.pos.x++
                  
                 }
               }
-              for (this.radians = 0; this.radians < 90; this.radians++) {
+              for (this.radians = 0; this.radians < 91; this.radians++) {
         
                 this.x1 = cos(radians(this.radians)) * this.radius1
                 this.y1 = sin(radians(this.radians)) * this.radius2
@@ -59,7 +59,7 @@ class ring {
           if (this.pos.x < this.x1 + width / 2 &&  this.pos.y < this.y1 + height / 2.5+13 &&this.pos.y>height/5) {
             this.max = cos(radians(270)) * this.radius1+width/2
             this.vel.y=0
-            this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
+            this.vel.y=this.pos.x/this.max*this.pos.x/this.max
              this.vel.x=0
            this.pos.x++
           }
