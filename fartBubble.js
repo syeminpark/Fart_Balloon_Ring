@@ -69,6 +69,8 @@ class fartBubble {
   
       this.pos.x+=this.vx
       this.pos.y+=this.vy
+
+      
       this.pos.add(this.vel)
   
       this.vel.add(this.acc)

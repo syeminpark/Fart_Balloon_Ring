@@ -6,12 +6,14 @@ let Screen;
 let Fingers;
 let bubbleNum
 
+
 let d
 let value;
 
 let friction = 0;
 let buoyancy;
 let current;
+let gravity
 
 let rad1
 let rad2
@@ -22,7 +24,9 @@ let spring =0.005
 function setup() {
   createCanvas(800, 600);
 
+  gravity=createVector(0,-0.01)
 
+  //screen의 width/height이다
 
   rad1 = width * 0.55 / 2
   rad2 = height / 2.5 / 2
@@ -31,13 +35,16 @@ function setup() {
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
-  Ring = new ring();
+  Ring = new ring(createVector(width*0.3,height/3));
   Screen = new screen(rad1, rad2);
+ 
 }
 
 function draw() {
   background(255, 100, 90);
   strokeWeight(10);
+
+  current = createVector(random(-0.2, 0.2), 0)
 
   Fart.show()
   Fart.mask()
@@ -45,6 +52,10 @@ function draw() {
   Screen.show()
   Fingers.show()
   Ring.show()
+  Ring.edge(rad1,rad2)
+  Ring.move(gravity)
+  Ring.collide()
+  
   Screen.outline()
   
 
@@ -101,8 +112,6 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
    }
  }
 }
-
-
 
 function title() {
 
