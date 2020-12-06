@@ -24,7 +24,7 @@ let spring =0.005
 function setup() {
   createCanvas(800, 600);
 
-  gravity=createVector(0,-0.01)
+  gravity=createVector(0,0.01)
 
   //screen의 width/height이다
 
@@ -37,6 +37,7 @@ function setup() {
   Fart = new fart();
   Ring = new ring(createVector(width*0.3,height/3));
   Screen = new screen(rad1, rad2);
+
  
 }
 
@@ -56,18 +57,21 @@ function draw() {
   Ring.move(gravity)
   Ring.collide()
   
+  
   Screen.outline()
   
 
   FartBubble.forEach(fartBubble =>{
     buoyancy = createVector(0, -0.05);
-    current = createVector(random(-0.2, 0.2), 0)
+    current = createVector(random(-0.1, 0.1), 0)
 
-    fartBubble.show()
+    fartBubble.check(rad1,rad2)
+    fartBubble.show(d)
     fartBubble.collide()
     fartBubble.move(buoyancy)
     fartBubble.move(current)
     fartBubble.edge(rad1, rad2)
+
 
 })
 
@@ -92,7 +96,7 @@ bubbleNum=random(0,4)
     || dist(mouseX,mouseY,width/8,height*0.91)<30|| dist(mouseX,mouseY,width/5.05,height*0.93)<30|| dist(mouseX,mouseY,width/3.8,height*0.89)<30
     || dist(mouseX,mouseY,width/3.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3,height*0.79)<20){
   for(let i=0;i<bubbleNum;i++){
-     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.9, height / 2),random(20,30))
+     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.4, height / 1.5),random(20,30))
     let p = new fartBubble(rightBubble,i,FartBubble);
     FartBubble.push(p)
 
@@ -104,7 +108,7 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
    || dist(mouseX,mouseY,width/8*7,height*0.91)<30|| dist(mouseX,mouseY,width/5.05*4.05,height*0.93)<30|| dist(mouseX,mouseY,width/3.8*2.8,height*0.89)<30
    || dist(mouseX,mouseY,width/3.8*2.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4*2.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3*2,height*0.79)<20){
      for(let i=0;i<bubbleNum;i++){
-       leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.9, height / 2),random(20,30))
+       leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.4, height / 1.5),random(20,30))
      let p= new fartBubble(leftBubble,i,FartBubble);
      FartBubble.push(p)
 

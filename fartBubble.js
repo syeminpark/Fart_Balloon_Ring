@@ -7,6 +7,7 @@ class fartBubble {
       this.others = oin;
       this.vx = 0;
       this.vy = 0;
+      this.stroke=0
   
       this.radians = 0
       this.x1 = 0
@@ -15,14 +16,26 @@ class fartBubble {
       this.min=0
       this.color=0
       this.mass=1
+      this.L_Between=0
+      this.R_Between=0
     }
   
     show(d) {
       this.color=d
-  
-      fill(this.color,this.color,this.color)
-      stroke(210,240,20)
-      strokeWeight(8)
+
+      if(this.L_Between==false||this.R_Between==false){
+      noFill()
+      this.stroke=0
+      }
+      else{
+        fill(this.color,this.color,this.color)
+        this.stroke=8
+      }
+      
+      
+    
+      stroke(201,240,20)
+      strokeWeight(this.stroke)
   
       ellipse(this.pos.x, this.pos.y, this.pos.z)
     }
@@ -104,6 +117,8 @@ class fartBubble {
             this.vel.y=this.pos.x/this.max*this.pos.x/this.max-0.8
              this.vel.x=0
            this.pos.x++
+           
+
           }
         }
         for (this.radians = 275; this.radians < 360; this.radians++) {
@@ -121,4 +136,37 @@ class fartBubble {
           }
         }
     }
+    check(x,y){
+      this.radius1 = x
+      this.radius2 = y
+
+    
+
+      for (this.radians = 0; this.radians < 90; this.radians++) {
+        this.x1 = cos(radians(this.radians)) * this.radius1
+        this.y1 = sin(radians(this.radians)) * this.radius2
+        if(this.pos.x>this.x1+width*0.55 && this.pos.y>this.y1+height/2.5-30){
+          this.R_Between=false
+        }
+        else{
+          this.R_Between=true
+        }
+    
   }
+
+    for (this.radians = 180; this.radians > 90; this.radians--) {
+      this.x1 = cos(radians(this.radians)) * this.radius1
+      this.y1 = sin(radians(this.radians)) * this.radius2
+      if(this.pos.x<this.x1+width*0.55 && this.pos.y>this.y1+height/2.5-30){
+        this.L_Between=false
+      }
+      
+      else{
+        this.L_Between=true
+      }
+  }
+
+
+
+    }
+}

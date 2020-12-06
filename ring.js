@@ -35,6 +35,7 @@ class ring {
                  this.vel.x=0
         
                  this.pos.x++
+                 
                 }
               }
               for (this.radians = 0; this.radians < 90; this.radians++) {
