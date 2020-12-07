@@ -35,7 +35,7 @@ function setup() {
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
-  Ring = new ring(createVector(width*0.3,height/3));
+  Ring = new ring(createVector(width/2.05,height*0.25)); //width/2.05=center
   Screen = new screen(rad1, rad2);
 
  
@@ -52,10 +52,11 @@ function draw() {
   Ass.show()
   Screen.show()
   Fingers.show()
+  Ring.collide()
   Ring.show()
   Ring.edge(rad1,rad2)
   Ring.move(gravity)
-  Ring.collide()
+  
   
   
   Screen.outline()
@@ -84,8 +85,6 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   Screen.outline()
   title()
 }
-
-
 
 function mousePressed() {
 bubbleNum=random(0,4)

@@ -90,7 +90,7 @@ class fartBubble {
       this.acc.set(0, 0)
       this.acc.add(force)
   
-      if (this.pos.x + (this.pos.z / 2) > width*0.75) {
+      if (this.pos.x + (this.pos.z / 2) > width*0.65) {
   
            this.vx *= friction;
            this.vy*=-friction;
