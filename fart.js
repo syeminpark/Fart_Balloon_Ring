@@ -59,7 +59,7 @@ class fart {
     }
     mask(){
       stroke(220)
-      strokeWeight(0.5)
+      strokeWeight(random(0.1,2))
       noFill()
   
      //left mask
