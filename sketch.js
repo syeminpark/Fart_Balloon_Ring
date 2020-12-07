@@ -1,11 +1,12 @@
 let Ass;
 let Fart;
 let FartBubble = [];
-let Ring;
+let Ring=[]
 let Screen;
 let Fingers;
 let bubbleNum
 
+let RingPos
 
 let d
 let value;
@@ -35,7 +36,16 @@ function setup() {
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
-  Ring = new ring(createVector(width/2.05,height*0.25)); //width/2.05=center
+
+  for (let i=0;i<3;i++){
+
+  RingPos=createVector(width/2.5,random(height*0.3,height*0.5))
+
+    let a= new ring(RingPos,i,Ring); //width/2.05=center
+    Ring.push(a)
+  }
+
+
   Screen = new screen(rad1, rad2);
 
  
@@ -52,13 +62,16 @@ function draw() {
   Ass.show()
   Screen.show()
   Fingers.show()
-  Ring.collide()
-  Ring.show()
-  Ring.edge(rad1,rad2)
-  Ring.move(gravity)
+
+  Ring.forEach(ring =>{ 
+  ring.collideScreen()
+  ring.collideSelf()
+  ring.show()
+  ring.edge(rad1,rad2)
+  ring.move(gravity)
+  })
   
-  
-  
+
   Screen.outline()
   
 

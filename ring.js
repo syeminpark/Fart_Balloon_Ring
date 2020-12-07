@@ -1,8 +1,13 @@
 class ring {
-    constructor(x) {
+    constructor(x,idin,oin) {
          this.pos=x
          this.w=50
          this.h=15
+
+         this.id=idin
+         this.others=oin
+         this.vx=0
+         this.vy=0
 
         this.vel = createVector(0, 0)
         this.acc = createVector(0, 0)
@@ -14,9 +19,10 @@ class ring {
         this.min=0
 
         this.complete=false
+        this.bounce=false
        
 
-        this.others=0
+
         this.vx=0
         this.vy=0
     }
@@ -40,23 +46,24 @@ class ring {
                 if (this.pos.x < this.x1 + width / 2 &&  this.pos.y >this.y1 + height / 2.5-13) {
                   this.max = cos(radians(270)) * this.radius1+width/2
                   this.vel.y=0
-                this.vel.y=this.pos.x/this.max/this.pos.x/this.max-1+1.4
+                this.vel.y=this.pos.x/this.max/this.pos.x/this.max+0.4
                  this.vel.x=0
         
                  this.pos.x++
                  
                 }
               }
+              //오른쪽 부분
               for (this.radians = 0; this.radians < 91; this.radians++) {
         
                 this.x1 = cos(radians(this.radians)) * this.radius1
                 this.y1 = sin(radians(this.radians)) * this.radius2
             
         
-                if (this.x1 + width / 2 < this.pos.x && this.pos.y > this.y1 + height / 2.5-13) {
+                if (this.x1 + width / 2 < this.pos.x && this.pos.y > this.y1 + height / 2.5-35) {
                   this.min = cos(radians(275)) * this.radius1+width/2
                   this.vel.y=0
-                  this.vel.y=this.min/this.pos.x/this.min/this.pos.x*this.min/this.pos.x-0.8
+                  this.vel.y=this.min/this.pos.x/this.min/this.pos.x*this.min/this.pos.x+0.4
                   this.vel.x=0
                   this.pos.x--
                 }
@@ -94,18 +101,22 @@ class ring {
        
        this.force=force
 
-        if(this.collide()){
-            this.vel=createVector(0,0)
+       if(this.collideScreen()){
+        this.vel=createVector(0,0)
+
+    }
+
+       else if(this.collideSelf()){
+
+        this.vel.y-=0.01
+        this.acc=createVector(0,-0.001)
+
+        this.force*=-1
 
         }
-        else{
+   
         
-        }
-           
-    
-        
-        
-
+      
         this.pos.add(this.vel)
         this.vel.add(this.acc)
         this.acc.set(0, 0)
@@ -113,7 +124,39 @@ class ring {
        
   
     }
-    collide(){
+
+    collideSelf(){
+      for (let i = this.id + 1; i < Ring.length; i++) {
+  
+        let dx = this.others[i].pos.x - this.pos.x;
+        let dy = this.others[i].pos.y - this.pos.y;
+  
+        let distance = sqrt(dx * dx + dy * dy);
+        let minDist = this.others[i].h/ 2 + this.h / 2;
+        
+        if (distance < minDist) {
+  
+           let angle = atan2(dy, dx);
+           let targetX = this.pos.x + cos(angle) * minDist;
+           let targetY = this.pos.y + sin(angle) * minDist;
+  
+           let ax = (targetX - this.others[i].pos.x) * -0.03;
+          let ay = (targetY - this.others[i].pos.y) * -0.2;
+  
+          this.vx -= ax;
+          this.vy -= ay;
+  
+          this.others[i].vx += ax;
+          this.others[i].vy += ay;
+
+          this.bounce=true
+          return this.bounce
+        }
+      }
+
+    }
+
+    collideScreen(){
 
 
         this.ring_L_edge=this.pos.x
@@ -146,33 +189,58 @@ class ring {
         
 
         if ((this.ring_R_edge>this.middle_L_edge && this.ring_B_edge>this.middle_T_edge) && this.ring_L_edge<this.middle_R_edge ){
-            if(this.ring_L_edge+1>=this.middle_L_edge|| this.ring_R_edge-1<= this.middle_R_edge){
-                this.pos.y=height*0.05
+            if(this.ring_L_edge+3>=this.middle_L_edge|| this.ring_R_edge-3<= this.middle_R_edge){
+        
+              if (this.pos.x<width/2){
+              this.pos.x--
+              }
+              else{
+                this.pos.x++
+              }
             }
             else{
-                this.complete=true-   
+                this.complete=true
             }
         }
 
-        if((this.ring_R_edge>this.nail_L_edge && this.ring_B_edge>this.nail_T_edge)&&this.ring_L_edge<this.nail_r_edge){
-            if(this.ring_L_edge>this.nail_L_edge ||this.ring_R_edge<this.nail_R_edge   ){
-                this.pos.y=height*0.05
-                     }
+        if(this.ring_R_edge>this.nail_L_edge && this.ring_B_edge>this.nail_T_edge&&this.ring_L_edge<this.nail_R_edge){
+             if(this.ring_L_edge>=this.nail_L_edge || this.ring_R_edge<=this.nail_R_edge ){
+              
+              if (this.pos.x<width/2){
+              this.pos.x--
+              }
+              else{
+                this.pos.x++
+              }
+             }
         }
 
         if (this.ring_R_edge>this.pinky_L_edge && this.ring_B_edge>this.pinky_T_edge){
             if (this.ring_L_edge<this.thumb_R_edge){
-                
+              
+              this.vel.y*=-0.9
+              if (this.pos.x<width/2){
+              this.pos.x--
+              }
+              else{
+                this.pos.x++
+              }
             }
         }
         if(this.ring_R_edge>this.ringFin_L_edge && this.ring_B_edge>this.ringFin_T_edge){
             if(this.ring_L_edge<this.index_R_edge){
                 if(this.complete==false){
-                    this.pos.y=height*0.2
+                  
+                  if (this.pos.x<width/2){
+                     this.pos.x--
+                     }
+                  else{
+                    this.pos.x++
                     }
-                else{
-                    return (this.complete)
                     }
+              else{
+                 return (this.complete)
+               }
                 
             }
         }
