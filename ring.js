@@ -101,7 +101,7 @@ class ring {
        
        this.force=force
 
-       if(this.collideScreen()){
+       if(this.collideFinger()){
         this.vel=createVector(0,0)
 
     }
@@ -156,7 +156,7 @@ class ring {
 
     }
 
-    collideScreen(){
+    collideFinger(){
 
 
         this.ring_L_edge=this.pos.x
@@ -188,8 +188,8 @@ class ring {
 
         
 
-        if ((this.ring_R_edge>this.middle_L_edge && this.ring_B_edge>this.middle_T_edge) && this.ring_L_edge<this.middle_R_edge ){
-            if(this.ring_L_edge+3>=this.middle_L_edge|| this.ring_R_edge-3<= this.middle_R_edge){
+        if ((this.ring_R_edge>=this.middle_L_edge && this.ring_B_edge>=this.middle_T_edge) && this.ring_L_edge<=this.middle_R_edge ){
+            if(this.ring_L_edge+7>=this.middle_L_edge|| this.ring_R_edge<= this.middle_R_edge){
         
               if (this.pos.x<width/2){
               this.pos.x--
@@ -218,7 +218,7 @@ class ring {
         if (this.ring_R_edge>this.pinky_L_edge && this.ring_B_edge>this.pinky_T_edge){
             if (this.ring_L_edge<this.thumb_R_edge){
               
-              this.vel.y*=-0.9
+              this.vel.y*=-0.8
               if (this.pos.x<width/2){
               this.pos.x--
               }

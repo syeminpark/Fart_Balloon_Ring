@@ -39,7 +39,7 @@ function setup() {
 
   for (let i=0;i<3;i++){
 
-  RingPos=createVector(width/2.5,random(height*0.3,height*0.5))
+  RingPos=createVector(width/1.8,random(height*0.2,height*0.3))
 
     let a= new ring(RingPos,i,Ring); //width/2.05=center
     Ring.push(a)
@@ -64,7 +64,7 @@ function draw() {
   Fingers.show()
 
   Ring.forEach(ring =>{ 
-  ring.collideScreen()
+  ring.collideFinger()
   ring.collideSelf()
   ring.show()
   ring.edge(rad1,rad2)
