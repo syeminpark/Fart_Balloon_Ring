@@ -9,6 +9,7 @@ let Sound
 let fartText
 let instructText
 let slider
+let Title
 
 let RingPos
 
@@ -28,7 +29,7 @@ let spring =0.005
 
 function setup() {
   canvas= createCanvas(800, 600);
-  canvas.position(400,100)
+  canvas.position(400,150)
 
 
   gravity=createVector(0,0.01)
@@ -42,6 +43,7 @@ function setup() {
   Ass = new ass();
   Fart = new fart();
   Sound= new sound();
+  Title=new title();
 
   for (let i=0;i<3;i++){
 
@@ -52,10 +54,14 @@ function setup() {
   }
   Screen = new screen(rad1, rad2);
   slider= createSlider(50,300,100)
+  slider.position(750,700)
+  slider.size(100,100)
 
-  instructText=createP()
-  canvas.mouseOver(instruct);
-  canvas.mouseOut(del)
+
+
+  
+  canvas.mouseOver(Title.instructText);
+  canvas.mouseOut(Title.delText)
  
 }
 
@@ -107,13 +113,6 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   }
 
   Screen.outline()
-  title()
+  Title.header()
 }
 
-
-function instruct(){
-  instructText.html("click the fart Buttons to put the marridge ring on the middle finger.")
-}
-function del(){
-  instructText.html("")
-}

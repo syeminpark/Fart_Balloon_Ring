@@ -15,7 +15,7 @@ bubbleNum=random(0,4)
     value=255
  
   }
-  createP('뿡')
+
 
 }
 else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/4.5*3.5,height*0.78)<30 || dist(mouseX,mouseY,width/6.4*5.4,height*0.818)<32
@@ -29,6 +29,6 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
 
     value=1
    }
-   createP('뿡')
+   
  }
 }
