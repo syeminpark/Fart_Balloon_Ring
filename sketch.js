@@ -6,7 +6,7 @@ let Screen;
 let Fingers;
 let bubbleNum
 let Sound
-
+let fartText
 
 let RingPos
 
@@ -25,7 +25,9 @@ let spring =0.005
 
 
 function setup() {
-  createCanvas(800, 600);
+  canvas= createCanvas(800, 600);
+  canvas.position(400,100)
+
 
   gravity=createVector(0,0.01)
 
@@ -46,15 +48,14 @@ function setup() {
     let a= new ring(RingPos,i,Ring); //width/2.05=center
     Ring.push(a)
   }
-
-
   Screen = new screen(rad1, rad2);
-
+  fartText=createP('뿡')
  
 }
 
 function draw() {
-  background(255, 100, 90);
+  // background(255, 100, 90);
+  clear()
   strokeWeight(10);
 
   current = createVector(random(-0.2, 0.2), 0)

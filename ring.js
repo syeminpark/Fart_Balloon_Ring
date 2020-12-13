@@ -132,7 +132,7 @@ class ring {
 
        if (this.collideBub()){
 
-        circle(width/2,height/2,50)
+        // circle(width/2,height/2,50)
         this.force=createVector(random(-0.1,0.1),-0.1)
         this.acc.add(this.force)
         this.vel.add(this.acc)
