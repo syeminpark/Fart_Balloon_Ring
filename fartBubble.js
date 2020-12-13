@@ -1,6 +1,11 @@
 class fartBubble {
     constructor(x,idin,oin) {
       this.pos = x
+      this.posX=this.pos.x
+      this.posY=this.pos.y
+      this.posZ=100
+      
+
       this.vel = createVector(0, 0)
       this.acc = createVector(0, 0)
       

@@ -5,6 +5,9 @@ let Ring=[]
 let Screen;
 let Fingers;
 let bubbleNum
+let rfCollide
+let Sound
+
 
 let RingPos
 
@@ -32,10 +35,11 @@ function setup() {
   rad1 = width * 0.55 / 2
   rad2 = height / 2.5 / 2
 
-
+  rfCollide=new rfcollide()
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
+  Sound= new sound();
 
   for (let i=0;i<3;i++){
 
@@ -96,8 +100,11 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   }
 
   Screen.outline()
+  rfCollide.collide()
   title()
 }
+
+
 
 function mousePressed() {
 bubbleNum=random(0,4)
@@ -111,9 +118,11 @@ bubbleNum=random(0,4)
      rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.4, height / 1.5),random(20,30))
     let p = new fartBubble(rightBubble,i,FartBubble);
     FartBubble.push(p)
+    Sound.fartSound()
 
 
     value=255
+ 
   }
 }
 else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/4.5*3.5,height*0.78)<30 || dist(mouseX,mouseY,width/6.4*5.4,height*0.818)<32
@@ -123,6 +132,7 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
        leftBubble = createVector(random(width * 0.6, width * 0.7), random(height / 1.4, height / 1.5),random(20,30))
      let p= new fartBubble(leftBubble,i,FartBubble);
      FartBubble.push(p)
+     Sound.fartSound()
 
     value=1
    }

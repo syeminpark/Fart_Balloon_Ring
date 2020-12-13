@@ -20,8 +20,13 @@ class ring {
 
         this.complete=false
         this.bounce=false
-       
 
+        this.ring_L_edge=this.pos.x
+        this.ring_R_edge=this.pos.x+this.w
+        this.ring_T_edge=this.pos.y
+        this.ring_B_edge=this.pos.y+this.h
+
+        this.ringCoord=[]
 
         this.vx=0
         this.vy=0
@@ -244,6 +249,8 @@ class ring {
                 
             }
         }
+      
+  
 
     }    
   
