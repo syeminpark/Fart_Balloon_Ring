@@ -6,6 +6,7 @@ class title{
         this.it=0
 
 
+
     }
 
     header(){
@@ -29,7 +30,9 @@ class title{
 
 
     this.it.style('font-size', '25px')
+  
 
+    // this.it.textFont(this.font)
     this.it.html("Use fart buttons to place marridge rings on the middle finger.")
     return (this.it)
       

@@ -1,16 +1,21 @@
 html, body {
   margin: 0;
-  margin: 80px 0 0 650px;
+  margin: 0px 0 0 210px;
   padding: 0;
   background-color: #ff645a;
   color:#ffc864;
   text-align: center;
-  font-size: 50px;
+  font-size: 30px;
   position:absolute;
 
+ 
+  
   
 
 }
 canvas {
   display: block;
+  
+
+  
 }
