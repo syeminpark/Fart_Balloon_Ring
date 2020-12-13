@@ -27,7 +27,7 @@ class title{
     instructText(){
     this.it=createP()
 
-    this.it.position(500,100)
+
     this.it.style('font-size', '25px')
 
     this.it.html("Use fart buttons to place marridge rings on the middle finger.")

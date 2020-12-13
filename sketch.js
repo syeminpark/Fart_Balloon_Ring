@@ -29,7 +29,7 @@ let spring =0.005
 
 function setup() {
   canvas= createCanvas(800, 600);
-  canvas.position(400,150)
+
 
 
   gravity=createVector(0,0.01)
@@ -54,7 +54,7 @@ function setup() {
   }
   Screen = new screen(rad1, rad2);
   slider= createSlider(50,300,100)
-  slider.position(750,700)
+
   slider.size(100,100)
 
 
