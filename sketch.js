@@ -7,6 +7,8 @@ let Fingers;
 let bubbleNum
 let Sound
 let fartText
+let instructText
+let slider
 
 let RingPos
 
@@ -49,7 +51,11 @@ function setup() {
     Ring.push(a)
   }
   Screen = new screen(rad1, rad2);
-  fartText=createP('뿡')
+  slider= createSlider(50,300,100)
+
+  instructText=createP()
+  canvas.mouseOver(instruct);
+  canvas.mouseOut(del)
  
 }
 
@@ -104,3 +110,10 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   title()
 }
 
+
+function instruct(){
+  instructText.html("click the fart Buttons to put the marridge ring on the middle finger.")
+}
+function del(){
+  instructText.html("")
+}

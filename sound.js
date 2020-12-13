@@ -5,7 +5,7 @@ class sound{
         this.env=0
         this.filter=0
 
-        this.carrierFreq=random(50,130)
+        this.carrierFreq=0
         this.modFreq=1
         this.modDepth=random(20,50)
 
@@ -14,6 +14,8 @@ class sound{
     }
 
     fartSound(){
+        this.carrierFreq=slider.value()
+
         this.osc=  new p5.Oscillator('sawtooth');
         this.osc.freq(this.carrierFreq)
         this.osc.start()
@@ -38,6 +40,7 @@ class sound{
 -
         this.env.play(this.osc)
       
+        
 
     }
 }

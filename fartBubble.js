@@ -84,6 +84,7 @@ class fartBubble {
   
     move(force) {
   
+  
       this.pos.x+=this.vx
       this.pos.y+=this.vy
 
