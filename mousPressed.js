@@ -11,7 +11,7 @@ bubbleNum=random(0,4)
     let p = new fartBubble(rightBubble,i,FartBubble);
     FartBubble.push(p)
     Sound.fartSound()
-    createP("뿡")
+    createP('뿡')
     value=255
  
   }
@@ -24,7 +24,7 @@ else if(dist(mouseX,mouseY,width/5*4,height*0.87)<50 ||dist(mouseX,mouseY,width/
      let p= new fartBubble(leftBubble,i,FartBubble);
      FartBubble.push(p)
      Sound.fartSound()
-     createP("뿡")
+     createP('뿡')
 
     value=1
    }
