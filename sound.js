@@ -5,7 +5,7 @@ class sound{
         this.env=0
         this.filter=0
 
-        this.carrierFreq=97
+        this.carrierFreq=random(50,130)
         this.modFreq=1
         this.modDepth=random(20,50)
 

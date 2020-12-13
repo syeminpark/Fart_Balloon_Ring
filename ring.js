@@ -20,6 +20,7 @@ class ring {
 
         this.complete=false
         this.bounce=false
+        this.touch=false
 
 
         this.bubL=0
@@ -31,8 +32,6 @@ class ring {
         this.vy=0
         
         this.ringBubTouch=false
-
-
         
     }
     show() {
@@ -52,13 +51,21 @@ class ring {
                 this.x1 = cos(radians(this.radians)) * this.radius1
                 this.y1 = sin(radians(this.radians)) * this.radius2
         
-                if (this.pos.x < this.x1 + width / 2 &&  this.pos.y >this.y1 + height / 2.5-13) {
+                if (this.pos.x < this.x1 + width / 2 &&  this.pos.y >this.y1 + height / 2.5-23) {
                   this.max = cos(radians(270)) * this.radius1+width/2
-                  this.vel.y=0
+                
                 this.vel.y=this.pos.x/this.max/this.pos.x/this.max+0.4
                  this.vel.x=0
         
                  this.pos.x++
+
+                 if (this.ring_R_edge>=this.pinky_L_edge && this.ring_B_edge>=this.pinky_T_edge){
+                  if (this.ring_L_edge<=this.thumb_R_edge){
+                     this.vel.y*=-2.1
+
+                  }
+                }
+
                  
                 }
               }
@@ -69,12 +76,20 @@ class ring {
                 this.y1 = sin(radians(this.radians)) * this.radius2
             
         
-                if (this.x1 + width / 2 < this.pos.x && this.pos.y > this.y1 + height / 2.5-35) {
+                if (this.x1 + width / 2 < this.pos.x && this.pos.y > this.y1 + height / 2.5-30) {
                   this.min = cos(radians(275)) * this.radius1+width/2
-                  this.vel.y=0
+
                   this.vel.y=this.min/this.pos.x/this.min/this.pos.x*this.min/this.pos.x+0.4
                   this.vel.x=0
                   this.pos.x--
+      
+                  if (this.ring_R_edge>=this.pinky_L_edge && this.ring_B_edge>=this.pinky_T_edge){
+                    if (this.ring_L_edge<=this.thumb_R_edge){
+                       this.vel.y*=-2
+
+                    }
+                  }
+      
                 }
             }
      for (this.radians = 180; this.radians < 271; this.radians++) {
@@ -87,7 +102,6 @@ class ring {
             this.vel.y=this.pos.x/this.max*this.pos.x/this.max
              this.vel.x=0
            this.pos.x++
-           this.pos.y++
           }
         }
         
@@ -96,16 +110,20 @@ class ring {
           this.x1 = cos(radians(this.radians)) * this.radius1
           this.y1 = sin(radians(this.radians)) * this.radius2
   
-          if (this.x1 + width / 2 < this.pos.x && this.pos.y < this.y1 + height / 2.5+13&&this.pos.y>height/5) {
+          if (this.x1 + width / 2 < this.pos.x+this.pos.z/2 && this.pos.y < this.y1 + height / 2.5+13&&this.pos.y>height/5) {
             this.min = cos(radians(270)) * this.radius1+width/2
-            this.vel.y=0
-            this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
+            // this.vel.y=0
+            // this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
+            // this.vel.x=0
+            // this.pos.x--
             this.vel.x=0
-            this.pos.x--
-            this.pos.y++
+            this.vel.y=0
+            this.vel.y++
+            this.vel.x--
+
           }
         }
-    
+    return this.touch
     
 }
     move(force){
@@ -128,10 +146,8 @@ class ring {
     }
        else if(this.collideSelf()){
 
-        this.vel.y-=0.01
-        this.acc=createVector(0,-0.001)
 
-        this.force*=-1
+        this.force*=createVector(0,-0.1)
 
         }
         this.force=force
@@ -190,7 +206,11 @@ class ring {
 
           if (this.ring_L_edge<=this.bubR && this.ring_R_edge>=this.bubL){
             if (this.ring_B_edge>=this.bubT && this.ring_T_edge<=this.bubB){
-              this.ringBubTouch=true
+              this
+              .ringBubTouch=true
+            }
+            else{
+              this.ringBubTouch=false
             }
           }
           else{
@@ -233,8 +253,8 @@ class ring {
 
         
 
-        if ((this.ring_R_edge>=this.middle_L_edge && this.ring_B_edge>=this.middle_T_edge) && this.ring_L_edge<=this.middle_R_edge ){
-            if(this.ring_L_edge+7>=this.middle_L_edge|| this.ring_R_edge<= this.middle_R_edge){
+        if ((this.ring_R_edge>=this.middle_L_edge && this.ring_B_edge>=this.middle_T_edge) && this.ring_L_edge<=this.middle_R_edge){
+            if(this.ring_L_edge>=this.middle_L_edge|| this.ring_R_edge<= this.middle_R_edge){
         
               if (this.pos.x<width/2){
               this.pos.x--
@@ -242,6 +262,7 @@ class ring {
               else{
                 this.pos.x++
               }
+              this.complete=false
             }
             else{
                 this.complete=true
@@ -249,7 +270,7 @@ class ring {
         }
 
         if(this.ring_R_edge>this.nail_L_edge && this.ring_B_edge>this.nail_T_edge&&this.ring_L_edge<this.nail_R_edge){
-             if(this.ring_L_edge>=this.nail_L_edge || this.ring_R_edge<=this.nail_R_edge ){
+             if(this.ring_L_edge>this.nail_L_edge || this.ring_R_edge<this.nail_R_edge ){
               
               if (this.pos.x<width/2){
               this.pos.x--
@@ -260,11 +281,15 @@ class ring {
              }
         }
 
-        if (this.ring_R_edge>this.pinky_L_edge && this.ring_B_edge>this.pinky_T_edge){
-            if (this.ring_L_edge<this.thumb_R_edge){
-              
-              this.vel.y*=-1
+        if (this.ring_R_edge>=this.pinky_L_edge && this.ring_B_edge>=this.pinky_T_edge){
+            if (this.ring_L_edge<=this.thumb_R_edge){
+
+              if(this.ring_B_edge>this.pinky_T_edge && this.edge()){
+
+           
+              }
               if (this.pos.x<width/2){
+              
               this.pos.x--
               }
               else{

@@ -41,7 +41,7 @@ function setup() {
 
   for (let i=0;i<3;i++){
 
-  RingPos=createVector(width/1.5,height*0.5)
+  RingPos=createVector(random(width/2.4,width/3),random(height*0.3,height*0.5))
 
     let a= new ring(RingPos,i,Ring); //width/2.05=center
     Ring.push(a)
@@ -114,7 +114,7 @@ bubbleNum=random(0,4)
     || dist(mouseX,mouseY,width/8,height*0.91)<30|| dist(mouseX,mouseY,width/5.05,height*0.93)<30|| dist(mouseX,mouseY,width/3.8,height*0.89)<30
     || dist(mouseX,mouseY,width/3.8,height*0.82)<22.5|| dist(mouseX,mouseY,width/3.4,height*0.79)<22.5 || dist(mouseX,mouseY,width/3,height*0.79)<20){
   for(let i=0;i<bubbleNum;i++){
-     rightBubble = createVector(random(width / 2.4, width / 3.3), random(height / 1.4, height / 1.5),random(20,30))
+     rightBubble = createVector(random(width / 2.3, width / 3), random(height / 1.3, height / 1.4),random(20,30))
     let p = new fartBubble(rightBubble,i,FartBubble);
     FartBubble.push(p)
     Sound.fartSound()
