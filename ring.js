@@ -21,15 +21,19 @@ class ring {
         this.complete=false
         this.bounce=false
 
-        this.ring_L_edge=this.pos.x
-        this.ring_R_edge=this.pos.x+this.w
-        this.ring_T_edge=this.pos.y
-        this.ring_B_edge=this.pos.y+this.h
 
-        this.ringCoord=[]
+        this.bubL=0
+        this.bubR=0
+        this.bubB=0
+        this.bubT=0
 
         this.vx=0
         this.vy=0
+        
+        this.ringBubTouch=false
+
+
+        
     }
     show() {
 
@@ -83,6 +87,7 @@ class ring {
             this.vel.y=this.pos.x/this.max*this.pos.x/this.max
              this.vel.x=0
            this.pos.x++
+           this.pos.y++
           }
         }
         
@@ -97,6 +102,7 @@ class ring {
             this.vel.y=this.min/this.pos.x*this.min/this.pos.x*this.min/this.pos.x-0.8
             this.vel.x=0
             this.pos.x--
+            this.pos.y++
           }
         }
     
@@ -104,13 +110,22 @@ class ring {
 }
     move(force){
        
-       this.force=force
+      
 
-       if(this.collideFinger()){
+       if (this.collideBub()){
+
+        circle(width/2,height/2,50)
+        this.force=createVector(random(-0.1,0.1),-0.1)
+        this.acc.add(this.force)
+        this.vel.add(this.acc)
+        this.pos.add(this.vel)
+
+       }
+
+       else if(this.collideFinger()){
         this.vel=createVector(0,0)
 
     }
-
        else if(this.collideSelf()){
 
         this.vel.y-=0.01
@@ -119,19 +134,18 @@ class ring {
         this.force*=-1
 
         }
-   
-        
-      
+        this.force=force
         this.pos.add(this.vel)
         this.vel.add(this.acc)
         this.acc.set(0, 0)
         this.acc.add(this.force)
+        
        
   
     }
 
     collideSelf(){
-      for (let i = this.id + 1; i < Ring.length; i++) {
+      for (let i = this.id+1; i < Ring.length; i++) {
   
         let dx = this.others[i].pos.x - this.pos.x;
         let dy = this.others[i].pos.y - this.pos.y;
@@ -158,6 +172,32 @@ class ring {
           return this.bounce
         }
       }
+
+    }
+    collideBub(){
+        this.ring_L_edge=this.pos.x
+        this.ring_R_edge=this.pos.x+this.w
+        this.ring_T_edge=this.pos.y
+        this.ring_B_edge=this.pos.y+this.h
+        
+  
+
+        FartBubble.forEach(fartBubble =>{
+          this.bubL=fartBubble.pos.x-fartBubble.pos.z/2
+          this.bubR=fartBubble.pos.x+fartBubble.pos.z/2
+          this.bubT=fartBubble.pos.y-fartBubble.pos.z/2
+          this.bubB=fartBubble.pos.y+fartBubble.pos.z/2
+
+          if (this.ring_L_edge<=this.bubR && this.ring_R_edge>=this.bubL){
+            if (this.ring_B_edge>=this.bubT && this.ring_T_edge<=this.bubB){
+              this.ringBubTouch=true
+            }
+          }
+          else{
+            this.ringBubTouch=false
+          }
+        })
+        return this.ringBubTouch
 
     }
 
@@ -223,7 +263,7 @@ class ring {
         if (this.ring_R_edge>this.pinky_L_edge && this.ring_B_edge>this.pinky_T_edge){
             if (this.ring_L_edge<this.thumb_R_edge){
               
-              this.vel.y*=-0.8
+              this.vel.y*=-1
               if (this.pos.x<width/2){
               this.pos.x--
               }

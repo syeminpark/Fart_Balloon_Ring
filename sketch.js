@@ -5,7 +5,6 @@ let Ring=[]
 let Screen;
 let Fingers;
 let bubbleNum
-let rfCollide
 let Sound
 
 
@@ -35,7 +34,6 @@ function setup() {
   rad1 = width * 0.55 / 2
   rad2 = height / 2.5 / 2
 
-  rfCollide=new rfcollide()
   Fingers = new fingers();
   Ass = new ass();
   Fart = new fart();
@@ -43,7 +41,7 @@ function setup() {
 
   for (let i=0;i<3;i++){
 
-  RingPos=createVector(width/1.8,random(height*0.2,height*0.3))
+  RingPos=createVector(width/1.5,height*0.5)
 
     let a= new ring(RingPos,i,Ring); //width/2.05=center
     Ring.push(a)
@@ -69,7 +67,9 @@ function draw() {
 
   Ring.forEach(ring =>{ 
   ring.collideFinger()
+  
   ring.collideSelf()
+  ring.collideBub()
   ring.show()
   ring.edge(rad1,rad2)
   ring.move(gravity)
@@ -100,7 +100,6 @@ for (let i = FartBubble.length - 1; i >= 0; i--) {
   }
 
   Screen.outline()
-  rfCollide.collide()
   title()
 }
 

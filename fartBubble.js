@@ -1,9 +1,7 @@
 class fartBubble {
     constructor(x,idin,oin) {
       this.pos = x
-      this.posX=this.pos.x
-      this.posY=this.pos.y
-      this.posZ=100
+        
       
 
       this.vel = createVector(0, 0)
@@ -151,7 +149,7 @@ class fartBubble {
       for (this.radians = 0; this.radians < 90; this.radians++) {
         this.x1 = cos(radians(this.radians)) * this.radius1
         this.y1 = sin(radians(this.radians)) * this.radius2
-        if(this.pos.x>this.x1+width*0.55 && this.pos.y>this.y1+height/2.5-30){
+        if(this.pos.x-this.pos.z>this.x1+width*0.55 && this.pos.y+this.pos.z>this.y1+height/2.5-13){
           this.R_Between=false
         }
         else{
@@ -163,7 +161,7 @@ class fartBubble {
     for (this.radians = 180; this.radians > 90; this.radians--) {
       this.x1 = cos(radians(this.radians)) * this.radius1
       this.y1 = sin(radians(this.radians)) * this.radius2
-      if(this.pos.x<this.x1+width*0.55 && this.pos.y>this.y1+height/2.5-30){
+      if(this.pos.x+this.pos.z<this.x1+width*0.55 && this.pos.y+this.pos.z>this.y1+height/2.5-13){
         this.L_Between=false
       }
       
