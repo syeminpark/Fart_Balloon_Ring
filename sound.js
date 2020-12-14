@@ -9,7 +9,7 @@ class sound{
         this.modFreq=1
         this.modDepth=random(20,50)
 
-        this.cverb=0
+    
 
     }
 
@@ -28,12 +28,12 @@ class sound{
 
         this.osc.freq(this.mod)
     
-        this.env=  new p5.Envelope(1, 0.3, 0.1, 0.1);
+        this.env=  new p5.Envelope(1, 0.3, 0.1, 0.1)
 
 
         this.filter=new p5.LowPass()
         this.filter.freq(500)
-        this.filter.res(0.5)
+        this.filter.res(1)
 
         this.osc.disconnect()
         this.osc.connect(this.filter)
