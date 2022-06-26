@@ -10,3 +10,7 @@ Remember our childhood toy, the water ring game?
 
 ---------------
 Made with p5.js
+
+https://syeminpark.github.io/Fart_MiddleFinger_Ring/
+
+![alt text](https://github.com/syeminpark/Fart_MiddleFinger_Ring/blob/main/readmeImage.jpg?raw=true)
